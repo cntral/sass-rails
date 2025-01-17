@@ -127,7 +127,10 @@ module Sass
                 msg = "Extra .css in SASS/ERB file is unnecessary. Rename #{filename} to #{filename.sub('.css.sass.erb', '.sass.erb')}."
               end
 
-              ActiveSupport::Deprecation.warn(msg) if msg
+              if msg
+                deprecator = ActiveSupport::Deprecation.new
+                deprecator.warn( msg )
+              end
             end
 
             engine
